@@ -3,7 +3,7 @@
 
 
 ## Tools
-- Backend: Spring Framework(Legacy) - Security, WebMVC, Web, Data JPA
+- Backend: Spring Framework(Legacy) - Security, WebMVC, Web, Data JPA, Transaction, JDBC
 - Frontend: Vue.js - Router, Vuex, + BootStrap/Vanilla CSS
 - Network: Axios, Vanilla Ajax
 - DataBase: H2 Database(Embedded)
