@@ -1,4 +1,4 @@
-package com.sjwp.mission.config;
+package com.sjwp.mission.config.servlet;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
