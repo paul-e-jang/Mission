@@ -2,13 +2,24 @@ package com.sjwp.mission.domain.model.article;
 
 import java.util.List;
 
-public interface ArticleService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-    Article store(Article article);
+@Service
+public class ArticleService {
+	
+	@Autowired
+	ArticleRepository repo;
 
-    void delete(Long articleId);
+    public Article save(Article article) {
+    	return repo.save(article);
+    }
 
-    Article findById(Long articleId);
+    public void deletebyId(Long articleId) {
+    	repo.deleteById(articleId);
+    }
 
-    List<Article> findAll();
+    public List<Article> findAll(){
+    	return (List<Article>) repo.findAll();
+    }
 }

@@ -2,13 +2,24 @@ package com.sjwp.mission.domain.model.member;
 
 import java.util.List;
 
-public interface MemberService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-    Member store(Member member);
+@Service
+public class MemberService {
+	
+	@Autowired
+	MemberRepository memberRepository;
 
-    void delete(Long memberId);
+	public Member save(Member member) {
+		return memberRepository.save(member);
+	}
 
-    Member findById(Long memberId);
+    public void delete(Long memberId) {
+    	memberRepository.deleteById(memberId);
+    }
 
-    List<Member> findAll();
+    public List<Member> findAll(){
+    	return (List<Member>) memberRepository.findAll();
+    }
 }

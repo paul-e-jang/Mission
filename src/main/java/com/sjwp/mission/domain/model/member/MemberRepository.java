@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.sjwp.mission.domain.model.article.Article;
 
-public interface MemberRepository extends CrudRepository<Article, Long> {
+public interface MemberRepository extends CrudRepository<Member, Long> {
 }

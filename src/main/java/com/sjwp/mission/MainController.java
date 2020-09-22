@@ -8,7 +8,7 @@ public class MainController {
 	
 	@RequestMapping(value="/")
 	public String restTest() {
-		return "resources/index.html";
+		return "index.html";
 	}
 
 }
