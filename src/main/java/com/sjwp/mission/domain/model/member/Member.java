@@ -1,6 +1,5 @@
 package com.sjwp.mission.domain.model.member;
 
-import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,31 +9,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sjwp.mission.domain.model.AbstractBaseEntity;
+
 
 @Entity
 @Table(name = "Member")
-public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+public class Member extends AbstractBaseEntity{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6118481297088751224L;
+	
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "STUDENT_CODE", length = 20, nullable = false)
-    private String studentCode;
+    @Column(name = "MEMBER_CODE", length = 20, nullable = false)
+    private String memberCode;
     @Column(name = "PASSWORD", nullable = false, length = 20)
-    private int password;
+    private String password;
     @Column(name = "EMAIL_ADDRESS", nullable = false, length = 50)
     private String emailAddress;
     @Column(name = "NAME", nullable = false, length = 20)
-    private Date name;
+    private String name;
 
     public Member() {
     }
 
-    public Member(String studentCode, int password, String emailAddress, Date name) {
-        this.studentCode = studentCode;
-        this.password = password;
-        this.emailAddress = emailAddress;
-        this.name = name;
+    public static Member create(String memberCode, String password, String emailAddress, String name) {
+    	Member member = new Member();
+        member.memberCode = memberCode;
+        member.password = password;
+        member.emailAddress = emailAddress;
+        member.name = name;
+        return member;
     }
 
 
@@ -47,35 +56,35 @@ public class Member {
 		this.id = id;
 	}
 
-	public String getstudentCode() {
-		return studentCode;
+	public String getMemberCode() {
+		return memberCode;
 	}
 
-	public void setstudentCode(String studentCode) {
-		this.studentCode = studentCode;
+	public void setMemberCode(String memberCode) {
+		this.memberCode = memberCode;
 	}
 
-	public int getpassword() {
+	public String getpassword() {
 		return password;
 	}
 
-	public void setpassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getemailAddress() {
+	public String getEmailAddress() {
 		return emailAddress;
 	}
 
-	public void setemailAddress(String emailAddress) {
+	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
 
-	public Date getname() {
+	public String getName() {
 		return name;
 	}
 
-	public void setname(Date name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -83,7 +92,7 @@ public class Member {
     public String toString() {
         return "Course [" +
                 "id=" + id +
-                ", studentCode='" + studentCode + '\'' +
+                ", memberCode='" + memberCode + '\'' +
                 ", password=" + password +
                 ", emailAddress=" + emailAddress +
                 ", name=" + name +
@@ -96,13 +105,13 @@ public class Member {
         if (o == null || getClass() != o.getClass()) return false;
         Member course = (Member) o;
         return name == course.name &&
-                Objects.equals(studentCode, course.studentCode) &&
+                Objects.equals(memberCode, course.memberCode) &&
                 Objects.equals(password, course.password) &&
                 Objects.equals(emailAddress, course.emailAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentCode, password, emailAddress, name);
+        return Objects.hash(memberCode, password, emailAddress, name);
     }
 }

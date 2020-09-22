@@ -10,18 +10,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sjwp.mission.domain.model.AbstractBaseEntity;
+
 
 @Entity
 @Table(name = "Article")
-public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+public class Article extends AbstractBaseEntity {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7069790312811582251L;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
     @Column(name = "IMG_NAME", length = 100, nullable = false)
     private String imgName;
     @Column(name = "IMG_SIZE")
-    private int imgSize;
+    private String imgSize;
     @Column(name = "UPLOADER")
     private String uploader;
     @Column(name = "UPLOADED_TIME")
@@ -30,7 +37,7 @@ public class Article {
     public Article() {
     }
 
-    public Article(String imgName, int imgSize, String uploader, Date uploaded_time) {
+    public Article(String imgName, String imgSize, String uploader, Date uploaded_time) {
         this.imgName = imgName;
         this.imgSize = imgSize;
         this.uploader = uploader;
@@ -55,11 +62,11 @@ public class Article {
 		this.imgName = imgName;
 	}
 
-	public int getImgSize() {
+	public String getImgSize() {
 		return imgSize;
 	}
 
-	public void setImgSize(int imgSize) {
+	public void setImgSize(String imgSize) {
 		this.imgSize = imgSize;
 	}
 

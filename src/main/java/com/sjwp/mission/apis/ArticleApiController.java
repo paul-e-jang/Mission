@@ -3,8 +3,7 @@ package com.sjwp.mission.apis;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sjwp.mission.domain.model.article.Article;
@@ -23,9 +22,9 @@ public class ArticleApiController{
 		this.service = articleService;
 	}
 	
-    @RequestMapping(value="/api/{boardname}/articles")
+    @GetMapping(value="/api/getArticles")
     @ResponseBody
-    public List<Article> getArticles(@PathVariable("boardname") String boardname)
+    public List<Article> getArticles()
     		throws ArticleLoadException {
     	return (List<Article>) service.findAll();
     }

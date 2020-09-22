@@ -1,8 +1,12 @@
 package com.sjwp.mission.domain.model.member;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
-import com.sjwp.mission.domain.model.article.Article;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberRepository extends CrudRepository<Member, Long> {
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+	
+	Optional<Member> findByMemberCode(String memberCode);
+	Optional<Member> findByEmailAddress(String emailAddress);
 }

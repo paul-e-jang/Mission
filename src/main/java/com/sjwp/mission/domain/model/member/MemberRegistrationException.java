@@ -1,6 +1,6 @@
 package com.sjwp.mission.domain.model.member;
 
-public class MemberRegistrationException extends Exception{
+public class MemberRegistrationException extends RuntimeException{
 
 	/**
 	 * 
