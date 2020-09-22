@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface ArticleDao {
 
-    Article store(Article course);
+    Article store(Article article);
 
-    void delete(Long courseId);
+    void delete(Long articleId);
 
-    Article findById(Long courseId);
+    Article findById(Long articleId);
 
     List<Article> findAll();
 }

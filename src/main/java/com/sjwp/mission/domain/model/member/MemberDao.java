@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface MemberDao {
 
-    Member store(Member course);
+    Member store(Member member);
 
-    void delete(Long courseId);
+    void delete(Long memberId);
 
-    Member findById(Long courseId);
+    Member findById(Long memberId);
 
     List<Member> findAll();
 }
