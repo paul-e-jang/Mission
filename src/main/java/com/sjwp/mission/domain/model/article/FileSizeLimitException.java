@@ -1,6 +1,6 @@
 package com.sjwp.mission.domain.model.article;
 
-public class FileSizeLimitException extends ArticleRegisterException{
+public class FileSizeLimitException extends ArticleRegistrationException{
 
 	/**
 	 * 

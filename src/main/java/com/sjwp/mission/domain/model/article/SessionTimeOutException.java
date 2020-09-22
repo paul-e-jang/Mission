@@ -1,6 +1,6 @@
 package com.sjwp.mission.domain.model.article;
 
-public class SessionTimeOutException extends ArticleRegisterException {
+public class SessionTimeOutException extends ArticleRegistrationException {
 
 	/**
 	 * 

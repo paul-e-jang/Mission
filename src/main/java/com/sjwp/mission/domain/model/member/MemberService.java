@@ -2,7 +2,7 @@ package com.sjwp.mission.domain.model.member;
 
 import java.util.List;
 
-public interface MemberDao {
+public interface MemberService {
 
     Member store(Member member);
 

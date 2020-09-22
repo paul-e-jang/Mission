@@ -2,7 +2,7 @@ package com.sjwp.mission.domain.model.article;
 
 import java.util.List;
 
-public interface ArticleDao {
+public interface ArticleService {
 
     Article store(Article article);
 

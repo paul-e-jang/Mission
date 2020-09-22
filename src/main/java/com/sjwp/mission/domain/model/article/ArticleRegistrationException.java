@@ -1,6 +1,6 @@
 package com.sjwp.mission.domain.model.article;
 
-public class ArticleRegisterException extends Exception {
+public class ArticleRegistrationException extends Exception {
 
 	/**
 	 * 
