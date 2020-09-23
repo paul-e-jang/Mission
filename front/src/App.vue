@@ -1,32 +1,71 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+<div>
+  <header>
+  <AppBar />
+  </header>
+  <main>
+    <transition
+      :name="transitionName"
+      mode="out-in"
+      @beforeLeave="beforeLeave"
+      @enter="enter"
+      >
     <router-view/>
-  </div>
+    </transition>
+  </main>
+    <footer>
+  <Footer />
+    </footer>
+</div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import AppBar from './components/Appbar'
+import Footer from './components/Footer'
+const DEFAULT_TRANSITION = 'fade'
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  data () {
+    return {
+      transitionName: DEFAULT_TRANSITION,
+      prevHeight: 0
     }
+  },
+  created () {
+    this.$router.beforeEach((to, from, next) => {
+      this.transitionName = DEFAULT_TRANSITION
+      next()
+    })
+  },
+  methods: {
+    beforeLeave (element) {
+      this.prevHeight = getComputedStyle(element).height
+    },
+    enter (element) {
+      const { height } = getComputedStyle(element)
+
+      element.style.height = this.prevHeight
+
+      setTimeout(() => {
+        element.style.height = height
+      })
+    },
+    afterEnter (element) {
+      element.style.height = 'auto'
+    }
+  },
+  components: {
+    AppBar,
+    Footer
   }
 }
+</script>
+
+<style>
+@import './css/master.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 </style>
