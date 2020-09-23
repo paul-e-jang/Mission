@@ -3,8 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import Lightbox from 'vue-easy-lightbox'
+import Vuelidate from 'vuelidate'
+import eventBus from './event-bus'
 
 Vue.config.productionTip = false
+Vue.use(Lightbox)
+Vue.use(Vuelidate)
 
 axios.defaults.baseURL = '/api'
 axios.defaults.headers.common.Accept = 'application/json'
@@ -14,6 +19,8 @@ axios.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+Vue.prototype.$bus = eventBus
 
 new Vue({
   router,
