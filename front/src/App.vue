@@ -22,6 +22,7 @@
 <script>
 import AppBar from './components/Appbar'
 import Footer from './components/Footer'
+
 const DEFAULT_TRANSITION = 'fade'
 
 export default {
@@ -32,6 +33,7 @@ export default {
     }
   },
   created () {
+    document.title = 'SmartJack coding test'
     this.$router.beforeEach((to, from, next) => {
       this.transitionName = DEFAULT_TRANSITION
       next()
