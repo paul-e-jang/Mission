@@ -1,7 +1,5 @@
 
-
 body {
-    font-family: 'helvetica', 'sans-serif';
     margin: 0;
 }
 
@@ -278,12 +276,31 @@ nav ul li a:hover {
     color: #eee;
 }
 
+/* start: posts/comments styles */
+#notfound {
+    background: url('https://onclickwebdesign.com/wp-content/uploads/footer_bg_pattern.png') 0 0 repeat;
+    min-height: 85vh;
+    
+}
+
+#notfound .notfound-content {
+    color: #eee;
+    font-weight: 600;
+    font-size: 3rem;
+    position: relative;
+    margin: auto;
+    margin-top: 40vh;
+}
+
+/* end: posts/comments styles */
 
 /* start: footer styles */
 
 footer {
     background-color: #252525;
     padding: 25px 0 20px;
+    position: relative;
+    bottom: 0;
 }
 
 footer small {
