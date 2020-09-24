@@ -68,6 +68,7 @@ export default {
         this.$bus.$on('myDataFetched', data => {
           this.$store.commit('updateMyData', data)
         })
+        alert('로그인 성공')
         this.$router.push('/')
       }).catch((error) => {
         this.errorMessage = error.message

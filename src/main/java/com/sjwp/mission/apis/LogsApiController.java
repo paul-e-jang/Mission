@@ -3,6 +3,7 @@ package com.sjwp.mission.apis;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,7 @@ import com.sjwp.mission.domain.model.log.Logs;
 import com.sjwp.mission.domain.model.log.LogsService;
 import com.sjwp.mission.domain.model.member.SimpleMember;
 
+@Controller
 public class LogsApiController {
 	
 	LogsService service;
