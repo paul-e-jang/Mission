@@ -36,10 +36,6 @@ h5 {
     font-size: 1.2em;
 }
 
-a, router-link{
-    text-decoration: none;
-}
-
 p,
 label,
 strong {
@@ -55,6 +51,32 @@ strong {
     padding: 0 15px;
     justify-content: space-between;
 }
+
+.badge {
+    padding: 9px 20px;
+    color: #eee;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-align: center;
+    font-size: 0.75em;
+}
+
+.badge.premium-tournament {
+    background-color: #FFB320;
+    color: #252525;
+}
+
+.shade {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
 
 /* end: global style rules */
 
@@ -82,28 +104,6 @@ header {
     height: 1px;
     background-color: #FFB320;
     margin: 4px 0;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 5px 0 0;
-}
-
-nav ul li {
-    display: inline-block;
-    font-size: 1em;
-    margin-right: 30px;
-    vertical-align: middle;
-}
-
-nav ul li a {
-    color: #eee;
-    font-weight: 500;
-}
-
-nav ul li a:hover {
-    color: #FFB320;
 }
 
 #logo {
@@ -192,7 +192,7 @@ nav ul li a:hover {
 /* end: hero styles */
 
 
-/* start: latest news styles */
+/* start: pages-list styles */
 
 #pages-list {
     margin-bottom: 0px;
@@ -229,11 +229,12 @@ nav ul li a:hover {
     color: #eee;
 }
 
-/* start: posts/comments styles */
+/* end: pages-list styles */
+
+/* start: notfound styles */
 #notfound {
-    background: url('https://onclickwebdesign.com/wp-content/uploads/footer_bg_pattern.png') 0 0 repeat;
+    background: url('../assets/img/bg_pattern.png') 0 0 repeat;
     min-height: 85vh;
-    
 }
 
 #notfound .notfound-content {
@@ -245,7 +246,7 @@ nav ul li a:hover {
     margin-top: 40vh;
 }
 
-/* end: posts/comments styles */
+/* end: notfound styles */
 
 /* start: footer styles */
 
@@ -266,7 +267,7 @@ footer small .footer-heart {
 }
 
 footer small a {
-    color: #007BDC;
+    color: #FFB320;
 }
 
 footer ul {
@@ -419,3 +420,4 @@ footer ul li a {
 .fade-leave-active {
   opacity: 0
 }
+

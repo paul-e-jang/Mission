@@ -19,16 +19,34 @@ const routes = [{
   path: '/admin',
   name: 'Admin',
   component: () => import('../views/Admin.vue'),
-  meta: { transitionName: 'fade' }
+  meta: { transitionName: 'fade' },
+  children: [
+    {
+      path: '/record',
+      name: 'Record',
+      component: () => import('../components/LoginRecord.vue')
+    },
+    {
+      path: '/registerimage',
+      name: 'RegisterImage',
+      component: () => import('../components/RegisterImage.vue')
+    }
+  ]
 },
 {
   path: '/login',
   name: 'Login',
-  component: () => import('../views/Login.vue')
+  component: () => import('../views/Login.vue'),
+  meta: { transitionName: 'fade' }
 },
 {
   path: '/logout',
   redirect: '/'
+},
+{
+  path: '/register',
+  name: 'Register',
+  component: () => import('../views/Register.vue')
 },
 {
   path: '*',
