@@ -15,13 +15,13 @@ public class MemberRegistrationManagement {
 	    this.passwordEncryptor = passwordEncryptor;
 	  }
 
-	  public void register(String memberCode, String password, String emailAddress, String name)
+	  public void register(String username, String password, String emailAddress, String name)
 	    throws MemberRegistrationException {
-		  if(service.existsByMemberCodeOrEmailAddress(memberCode, emailAddress)) {
+		  if(service.existsByUsernameOrEmailAddress(username, emailAddress)) {
 			 throw new MemberAlreadyExistsException("이메일이나 아이디가 이미 등록되어있습니다.");
 		  }else {
 			  String encryptedPassword = passwordEncryptor.encrypt(password);
-			  Member newMember = Member.create(memberCode, encryptedPassword, emailAddress, name);
+			  Member newMember = Member.create(username, encryptedPassword, emailAddress, name);
 			  service.save(newMember);
 		  }
 	  }

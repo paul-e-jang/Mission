@@ -25,8 +25,8 @@ public class Member extends AbstractBaseEntity{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "MEMBER_CODE", length = 20, nullable = false)
-    private String memberCode;
+    @Column(name = "USERNAME", length = 20, nullable = false)
+    private String username;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
     @Column(name = "EMAIL_ADDRESS", nullable = false, length = 50)
@@ -37,9 +37,9 @@ public class Member extends AbstractBaseEntity{
     public Member() {
     }
 
-    public static Member create(String memberCode, String password, String emailAddress, String name) {
+    public static Member create(String username, String password, String emailAddress, String name) {
     	Member member = new Member();
-        member.memberCode = memberCode;
+        member.username = username;
         member.password = password;
         member.emailAddress = emailAddress;
         member.name = name;
@@ -56,12 +56,12 @@ public class Member extends AbstractBaseEntity{
 		this.id = id;
 	}
 
-	public String getMemberCode() {
-		return memberCode;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setMemberCode(String memberCode) {
-		this.memberCode = memberCode;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getpassword() {
@@ -92,7 +92,7 @@ public class Member extends AbstractBaseEntity{
     public String toString() {
         return "Course [" +
                 "id=" + id +
-                ", memberCode='" + memberCode + '\'' +
+                ", username='" + username + '\'' +
                 ", password=" + password +
                 ", emailAddress=" + emailAddress +
                 ", name=" + name +
@@ -105,13 +105,13 @@ public class Member extends AbstractBaseEntity{
         if (o == null || getClass() != o.getClass()) return false;
         Member course = (Member) o;
         return name == course.name &&
-                Objects.equals(memberCode, course.memberCode) &&
+                Objects.equals(username, course.username) &&
                 Objects.equals(password, course.password) &&
                 Objects.equals(emailAddress, course.emailAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberCode, password, emailAddress, name);
+        return Objects.hash(username, password, emailAddress, name);
     }
 }

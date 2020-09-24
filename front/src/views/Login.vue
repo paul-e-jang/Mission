@@ -3,9 +3,6 @@
   <form class="form-signin" @submit.prevent="submitForm">
     <div class="text-center mb-4">
       <span class="h3 mb-3 text-white">SmartJack 로그인</span>
-      <!--
-      <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a
-          href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>-->
     </div>
 
     <div v-show="errorMessage" class="alert alert-danger failed">{{ errorMessage }}</div>
@@ -71,10 +68,14 @@ export default {
         this.$bus.$on('myDataFetched', data => {
           this.$store.commit('updateMyData', data)
         })
-        this.$router.push({ name: 'Home' })
+        this.$router.push('/admin')
       }).catch((error) => {
         this.errorMessage = error.message
       })
+    },
+    isEmail (s) {
+      const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+      return Boolean(regExp.test(s))
     }
   }
 }

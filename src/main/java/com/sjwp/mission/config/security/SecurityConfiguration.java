@@ -23,7 +23,7 @@ import com.sjwp.mission.apis.authentication.SimpleLogoutSuccessHandler;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private static final String[] PUBLIC = new String[]{
-    "/", "/error", "/loginpage", "/api/logout", "/register", "/api/registrations", "/api/writeReply", "/api/wrtieArticle", "/api/default/articles"};
+    "/", "/error", "/login", "/api/logout", "/register", "/api/registrations", "/api/wrtieArticle"};
 
 
   @Override

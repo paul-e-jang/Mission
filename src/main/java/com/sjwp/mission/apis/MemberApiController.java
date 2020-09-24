@@ -1,13 +1,8 @@
 package com.sjwp.mission.apis;
-
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sjwp.mission.apis.payload.MemberRegistrationPayload;
 import com.sjwp.mission.apis.result.ApiResult;

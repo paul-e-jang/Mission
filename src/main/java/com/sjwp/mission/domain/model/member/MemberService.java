@@ -24,13 +24,13 @@ public class MemberService {
     	return (List<Member>) memberRepository.findAll();
     }
     
-    public boolean existsByMemberCodeOrEmailAddress(String memberCode, String emailAddress){
-    	return memberRepository.existsByMemberCodeOrEmailAddress(memberCode, emailAddress);
+    public boolean existsByUsernameOrEmailAddress(String username, String emailAddress){
+    	return memberRepository.existsByUsernameOrEmailAddress(username, emailAddress);
     }
     
     
-    public Optional<Member> findByMemberCode(String memberCode) {
-    	return memberRepository.findByMemberCode(memberCode);
+    public Optional<Member> findByUsername(String username) {
+    	return memberRepository.findByUsername(username);
     }
     
     public Optional<Member> findByEmailAddress(String emailAddress) {

@@ -31,13 +31,13 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
     throws AuthenticationException, IOException {
 	response.setContentType("text/xml;charset=UTF-8"); 
 	
-    log.debug("Processing login request");
+    log.debug("로그인 요청 처리 중");
 
     String requestBody = IOUtils.toString(request.getReader());
     
     LoginRequest loginRequest = JsonUtils.toObject(requestBody, LoginRequest.class);
     if (loginRequest == null || loginRequest.isInvalid()) {
-      throw new InsufficientAuthenticationException("Invalid authentication request");
+      throw new InsufficientAuthenticationException("잘못된 로그인 요청입니다.");
     }
 
     UsernamePasswordAuthenticationToken token =
