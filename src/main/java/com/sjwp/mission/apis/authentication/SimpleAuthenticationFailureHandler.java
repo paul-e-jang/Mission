@@ -23,7 +23,7 @@ public class SimpleAuthenticationFailureHandler implements AuthenticationFailure
     if (exception instanceof BadCredentialsException) {
       failure = ApiResult.message("로그인 정보가 잘못되었습니다.");
     } else if (exception instanceof InsufficientAuthenticationException) {
-      failure = ApiResult.message("올바르지 않은 요청입니다.");
+      failure = ApiResult.message("권한이 충분하지 않습니다.");
     } else {
       failure = ApiResult.message("자격 증명에 실패하였습니다.");
     }

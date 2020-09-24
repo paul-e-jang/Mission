@@ -15,17 +15,14 @@ import com.sjwp.mission.domain.model.AbstractBaseEntity;
 @Entity
 @Table(name = "Member")
 public class Member extends AbstractBaseEntity{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6118481297088751224L;
 	
+	static final long serialVersionUID = 2826879243205409697L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "USERNAME", length = 20, nullable = false)
+    @Column(name = "USERNAME", length = 20)
     private String username;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
@@ -51,6 +48,10 @@ public class Member extends AbstractBaseEntity{
     public Long getId() {
 		return id;
 	}
+    
+    public MemberId getMemberId() {
+		return new MemberId(id);
+	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -64,7 +65,7 @@ public class Member extends AbstractBaseEntity{
 		this.username = username;
 	}
 
-	public String getpassword() {
+	public String getPassword() {
 		return password;
 	}
 

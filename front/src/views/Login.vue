@@ -22,7 +22,7 @@
           <div class="denied" v-if="!$v.form.password.required">비밀번호를 입력하세요.</div>
           </div>
     </div>
-    <button class="btn-lg btn-warning btn-block mb-3 mt-3 login_btn" type="submit">로그인</button>
+    <button class="btn-lg btn-warning btn-block mb-3 mt-3 login_btn" type="submit" >로그인</button>
     <ul class="nav justify-content-center">
     </ul>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2020 <a href="http://github.com/bashpound">Github.com/bashpound/mission</a>
@@ -68,7 +68,7 @@ export default {
         this.$bus.$on('myDataFetched', data => {
           this.$store.commit('updateMyData', data)
         })
-        this.$router.push('/admin')
+        this.$router.push('/')
       }).catch((error) => {
         this.errorMessage = error.message
       })

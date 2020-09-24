@@ -1,7 +1,7 @@
 <template>
 <v-container>
     <v-data-table
-      :items="desserts"
+      :items="logs"
       :search="search"
       :sort-by="['created_date']"
       calculated-widths="true"
@@ -46,12 +46,12 @@
 </template>
 
 <script>
-import LogService from '@/services/log'
+import LogService from '@/services/logs'
 import DateParser from '@/utils/date-parser'
 import { mdiDelete } from '@mdi/js'
 
 export default {
-  name: 'BoardView',
+  name: 'LoginRecord',
   components: {
   },
   mounted () {
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     Fetch () {
-      LogService.fetchlogs('default')
+      LogService.fetchLogs()
       this.$bus.$on('logs', (data) => {
         this.logs = data.logs
       })

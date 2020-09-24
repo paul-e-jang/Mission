@@ -9,7 +9,7 @@ public class MemberRegistrationPayload {
 
   @Size(min = 2, max = 20, message = "아이디는 최소 2글자, 최대 20글자 입니다.")
   @NotNull
-  private String memberCode;
+  private String username;
   
   @Size(min = 10, max = 20, message = "패스워드는 최소 10글자, 최대 20자입니다.")
   @NotNull
@@ -26,13 +26,15 @@ public class MemberRegistrationPayload {
   private String name;
 
 
-public String getMemberCode() {
-	return memberCode;
+
+
+public String getUsername() {
+	return username;
 }
 
 
-public void setMemberCode(String memberCode) {
-	this.memberCode = memberCode;
+public void setUsername(String username) {
+	this.username = username;
 }
 
 

@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
-public class MemberService {
+public class MemberService implements MemberDetailService {
 	
 	@Autowired
 	MemberRepository memberRepository;
@@ -36,4 +39,19 @@ public class MemberService {
     public Optional<Member> findByEmailAddress(String emailAddress) {
     	return memberRepository.findByEmailAddress(emailAddress);
     }
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	    if (StringUtils.isEmpty(username)) {
+	      throw new UsernameNotFoundException("등록되지 않은 사용자입니다.");
+	    }	
+	    	Optional<Member> member = username.contains("@")?
+	    			memberRepository.findByEmailAddress(username) : memberRepository.findByUsername(username);
+	    	if(member.isPresent()) {
+	    		Member newMember = member.get();
+	    		return new SimpleMember(newMember);
+	    	}else {
+	    		throw new UsernameNotFoundException("등록되지 않은 사용자입니다.");
+	    	}
+	}
 }

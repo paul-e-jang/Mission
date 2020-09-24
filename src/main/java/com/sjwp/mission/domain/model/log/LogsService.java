@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class LogsService {
 	
@@ -12,6 +13,14 @@ public class LogsService {
 	LogsRepository repo;
 
     public List<Logs> findAll(){
-    	return (List<Logs>) repo.findAll();
+    	return repo.findAll();
     }
+    
+	public Logs save(Logs logs) {
+		return repo.save(logs);
+	}
+	
+	public Logs afterLogout(String username) {
+		return repo.afterLogout(username);
+	}
 }

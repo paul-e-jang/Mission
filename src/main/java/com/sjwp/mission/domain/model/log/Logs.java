@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.sjwp.mission.domain.model.AbstractBaseEntity;
 
@@ -16,35 +18,42 @@ import com.sjwp.mission.domain.model.AbstractBaseEntity;
 @Entity
 @Table(name = "Logs")
 public class Logs extends AbstractBaseEntity {
-    /**
+	
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7069790312811582251L;
+	private static final long serialVersionUID = 7378280742268000546L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private Long id;
     @Column(name = "USER_CODE", length = 100, nullable = false)
-    private String UserCode;
+    private String userCode;
     @Column(name = "Name")
     private String Name;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "LOG_IN_AT")
     private Date logInAt;
-    @Column(name = "LOG_OUTED_AT")
+    
+    @Column(name = "LOG_OUTED_AT", nullable = true)
     private Date logOuttedAt;
 
     public Logs() {
     }
 
-    public Logs(String UserCode, String Name, Date logInAt, Date logOuttedAt) {
-        this.UserCode = UserCode;
+    public Logs(String userCode, String Name) {
+        this.userCode = userCode;
         this.Name = Name;
-        this.logInAt = logInAt;
-        this.logOuttedAt = logOuttedAt;
     }
-
-
+    
+    public static Logs Create(String userCode, String Name) {
+    	Logs logs = new Logs();
+        logs.userCode = userCode;
+        logs.Name = Name;
+        return logs;
+    }
 
 	public Long getId() {
 		return id;
@@ -55,11 +64,11 @@ public class Logs extends AbstractBaseEntity {
 	}
 
 	public String getUserCode() {
-		return UserCode;
+		return userCode;
 	}
 
 	public void setUserCode(String userCode) {
-		UserCode = userCode;
+		this.userCode = userCode;
 	}
 
 	public String getName() {
@@ -90,7 +99,7 @@ public class Logs extends AbstractBaseEntity {
     public String toString() {
         return "Course [" +
                 "id=" + id +
-                ", UserCode='" + UserCode + '\'' +
+                ", userCode='" + userCode + '\'' +
                 ", Name=" + Name +
                 ", logInAt=" + logInAt +
                 ", logOuttedAt=" + logOuttedAt +
@@ -103,13 +112,13 @@ public class Logs extends AbstractBaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         Logs logs = (Logs) o;
         return id ==  logs.id&&
-                Objects.equals(UserCode, logs.UserCode) &&
+                Objects.equals(userCode, logs.userCode) &&
                 Objects.equals(Name, logs.Name) &&
                 Objects.equals(logInAt, logs.logInAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(UserCode, Name, logInAt, logOuttedAt);
+        return Objects.hash(userCode, Name, logInAt, logOuttedAt);
     }
 }

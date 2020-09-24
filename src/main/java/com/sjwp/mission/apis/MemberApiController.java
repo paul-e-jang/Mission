@@ -28,7 +28,7 @@ public class MemberApiController {
   @PostMapping("/api/registrations")
   public ResponseEntity<ApiResult> register(@Valid @RequestBody MemberRegistrationPayload payload) throws MemberRegistrationException {
     try {
-      management.register(payload.getMemberCode(), payload.getPassword(), payload.getEmailAddress(), payload.getName());
+      management.register(payload.getUsername(), payload.getPassword(), payload.getEmailAddress(), payload.getName());
       return Result.created();
     } catch (MemberRegistrationException e) {
       String errorMessage = "오류 발생";

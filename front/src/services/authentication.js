@@ -20,10 +20,30 @@ export default {
 
   fetchuser () {
     return new Promise((resolve, reject) => {
-      axios.post('/user').then(({ data }) => {
+      axios.get('/user').then(({ data }) => {
         resolve(data)
         eventBus.$emit('myDataFetched', data)
         console.log(data)
+      }).catch((error) => {
+        reject(errorParser.parse(error))
+      })
+    })
+  },
+
+  afterLogin () {
+    return new Promise((resolve, reject) => {
+      axios.post('/loginReg').then(({ data }) => {
+        resolve(data)
+      }).catch((error) => {
+        reject(errorParser.parse(error))
+      })
+    })
+  },
+
+  beforeLogOut () {
+    return new Promise((resolve, reject) => {
+      axios.post('/logOutReg').then(({ data }) => {
+        resolve(data)
       }).catch((error) => {
         reject(errorParser.parse(error))
       })

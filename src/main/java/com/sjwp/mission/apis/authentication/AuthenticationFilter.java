@@ -20,8 +20,6 @@ import com.sjwp.mission.utils.JsonUtils;
 
 public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-  private static final Logger log = LoggerFactory.getLogger(AuthenticationFilter.class);
-
   public AuthenticationFilter() {
     super(new AntPathRequestMatcher("/api/authentications", "POST"));
   }
@@ -30,9 +28,6 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
   public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
     throws AuthenticationException, IOException {
 	response.setContentType("text/xml;charset=UTF-8"); 
-	
-    log.debug("로그인 요청 처리 중");
-
     String requestBody = IOUtils.toString(request.getReader());
     
     LoginRequest loginRequest = JsonUtils.toObject(requestBody, LoginRequest.class);

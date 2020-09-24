@@ -14,6 +14,10 @@ public class ArticleService {
     public Article save(Article article) {
     	return repo.save(article);
     }
+    
+    public List<Article> saveAll(List<Article> articles) {
+    	return repo.saveAll(articles);
+    }
 
     public void deletebyId(Long articleId) {
     	repo.deleteById(articleId);

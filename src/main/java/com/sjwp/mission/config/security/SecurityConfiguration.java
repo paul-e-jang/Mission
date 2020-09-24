@@ -1,6 +1,9 @@
 package com.sjwp.mission.config.security;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -18,17 +22,21 @@ import com.sjwp.mission.apis.authentication.AuthenticationFilter;
 import com.sjwp.mission.apis.authentication.SimpleAuthenticationFailureHandler;
 import com.sjwp.mission.apis.authentication.SimpleAuthenticationSuccessHandler;
 import com.sjwp.mission.apis.authentication.SimpleLogoutSuccessHandler;
+import com.sjwp.mission.config.servlet.HistoryModeFilter;
 
+@Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private static final String[] PUBLIC = new String[]{
-    "/", "/error", "/login", "/api/logout", "/register", "/api/registrations", "/api/wrtieArticle"};
+    "/", "/error", "/login", "/logout", "/register", "/api/registrations", "/api/fetchLogs"};
 
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
+      .csrf().disable()
       .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
       .and()
       .authorizeRequests()
@@ -37,15 +45,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .and()
         .addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
         .addFilterAfter(apiRequestExceptionTranslationFilter(), ExceptionTranslationFilter.class)
+        //.addFilterAfter(new HistoryModeFilter(), FilterSecurityInterceptor.class)
         .formLogin()
         .loginPage("/login")
-        .permitAll()
       .and()
         .logout()
-        .logoutUrl("/api/logout")
-        .logoutSuccessHandler(logoutSuccessHandler())
-      .and()
-        .csrf().disable();
+        .logoutUrl("/logout")
+        .logoutSuccessHandler(logoutSuccessHandler());
   }
 
   @Override

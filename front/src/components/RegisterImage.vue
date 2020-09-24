@@ -3,20 +3,20 @@
   <div id="subject">
     <h2> 이미지 업로드 </h2>
   </div>
-  <v-row class="ma-5" v-if="imageUrl" id="grid-image">
+  <v-row class="ma-5" v-if="imageUrl.length<1" id="grid-image">
     <v-col>
         <v-container fluid>
           <v-row>
             <v-col
-              v-for="n in 8"
-              :key="n"
+              v-for="(item, idx) in imageUrl"
+              :key="idx"
               class="d-flex child-flex"
               cols="3"
             >
               <v-card flat tile class="d-flex">
                 <v-img
-                v-if="imageUrl"
-                :src="imageUrl"
+                v-if="imageUrl.length<1"
+                :src="item"
                 aspect-ratio="1"
                 class="grey lighten-2"
                 >
@@ -45,7 +45,7 @@
     @change="onChangeImages"
     accept="image/png, image/jpeg, image/bmp, image/jpg, image/gif"
     >
-    <v-btn rounded class="mr-3" :loading="loading" color="orange" outlined dark type="button" @click="onClickImageUpload" v-if="!imageUrl">이미지 선택
+    <v-btn rounded class="mr-3" :loading="loading" color="orange" outlined dark type="button" @click="onClickImageUpload" v-if="!imageUrl.length<1">이미지 선택
       <v-icon right dark>mdi-pencil</v-icon>
     </v-btn>
     <v-btn rounded color="indigo" class="mr-3" outlined dark type="button" @click="onClickImageUpload" v-if="imageUrl&&!loading">다시 선택
@@ -61,9 +61,10 @@
 export default {
   data () {
     return {
-      imageUrl: null,
+      imageUrl: [],
       loading: null,
-      loader: null
+      loader: null,
+      images: null
     }
   },
   methods: {
@@ -71,9 +72,11 @@ export default {
       this.$refs.imageInput.click()
     },
     onChangeImages (e) {
-      console.log(e.target.files)
-      const file = e.target.files[0]
-      this.imageUrl = URL.createObjectURL(file)
+      const files = e.target.files
+      this.images = files
+      files.array.forEach(element => {
+        this.imageUrl.push(URL.createObjectURL(element))
+      })
     }
   },
   watch: {
