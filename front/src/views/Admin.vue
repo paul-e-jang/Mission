@@ -3,7 +3,9 @@
   <nav class="admin-nav">
     <ul class="menu">
       <li class="menu-item">
+        <v-fade-transition>
         <router-link class="menu-link" to="/record" id="menu1">로그인 기록</router-link>
+        </v-fade-transition>
       </li>
       <li class="menu-item">
         <router-link class="menu-link" to="/registerimage" id="menu2" >이미지 등록</router-link>
@@ -21,6 +23,7 @@
 export default {
   mounted () {
     document.getElementById('menu1').focus()
+    this.$router.push('/record')
   }
 }
 </script>

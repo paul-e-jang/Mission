@@ -6,6 +6,7 @@ import axios from 'axios'
 import Lightbox from 'vue-easy-lightbox'
 import Vuelidate from 'vuelidate'
 import eventBus from './event-bus'
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 Vue.use(Lightbox)
@@ -25,5 +26,6 @@ Vue.prototype.$bus = eventBus
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

@@ -9,7 +9,7 @@ export default {
       axios.get('/fetchLogs').then(({ data }) => {
         resolve(data)
         console.log(data)
-        eventBus.$emit('logs', data)
+        eventBus.$emit('articleLoad', data)
       }).catch((error) => {
         reject(errorParser.parse(error))
       })

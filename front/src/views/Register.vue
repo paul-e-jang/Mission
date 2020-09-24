@@ -14,28 +14,28 @@
       <input type="text" v-model="form.username" id="user-code" class="form-control" placeholder="아이디" autofocus>
       <label for="Id">아이디를 입력하세요.</label>
          <div class="field-error" v-if="$v.form.username.$dirty">
-          <div class="error text-warning" v-if="!$v.form.username.required"> 입력하세요.</div>
+          <div class="denied" v-if="!$v.form.username.required">아이디를 입력하세요.</div>
           </div>
     </div>
     <div class="form-label-group">
-      <input type="text" v-model="form.username" id="email-address" class="form-control" placeholder="이메일" >
+      <input type="text" v-model="form.email" id="email-address" class="form-control" placeholder="이메일" >
       <label for="Id">이메일을 입력하세요.</label>
-         <div class="field-error" v-if="$v.form.username.$dirty">
-          <div class="error text-warning" v-if="!$v.form.username.required">이메일을 입력하세요.</div>
+         <div class="field-error" v-if="$v.form.email.$dirty">
+          <div class="denied" v-if="!$v.form.email.required">이메일을 입력하세요.</div>
           </div>
     </div>
     <div class="form-label-group">
       <input type="password" v-model="form.password" id="password" class="form-control" placeholder="비밀번호" >
       <label for="Pass">비밀번호를 입력하세요.</label>
           <div class="field-error" v-if="$v.form.password.$dirty">
-          <div class="error text-warning" v-if="!$v.form.password.required">비밀번호를 입력하세요.</div>
+          <div class="denied" v-if="!$v.form.password.required">비밀번호를 입력하세요.</div>
           </div>
     </div>
     <div class="form-label-group">
-      <input type="password" v-model="form.password" id="password2" class="form-control" placeholder="비밀번호2" >
+      <input type="password" v-model="form.password2" id="password2" class="form-control" placeholder="비밀번호2" >
       <label for="Pass">비밀번호를 한번 더 입력하세요.</label>
-          <div class="field-error" v-if="$v.form.password.$dirty">
-          <div class="error text-warning" v-if="!$v.form.password.required">비밀번호를 한번 더 입력하세요.</div>
+          <div class="field-error" v-if="$v.form.password2.$dirty">
+          <div class="denied" v-if="!$v.form.password2.required">비밀번호를 한번 더 입력하세요.</div>
           </div>
     </div>
     <button class="btn-lg btn-warning btn-block mb-3 mt-3 login_btn" type="submit">계정 등록</button>
@@ -57,7 +57,9 @@ export default {
     return {
       form: {
         username: '',
-        password: ''
+        email: '',
+        password: '',
+        password2: ''
       },
       errorMessage: ''
     }
@@ -68,6 +70,12 @@ export default {
         required
       },
       password: {
+        required
+      },
+      email: {
+        required
+      },
+      password2: {
         required
       }
     }
@@ -94,6 +102,9 @@ export default {
 </script>
 
 <style scoped>
+.denied {
+  color: #FFB320;
+}
 .login {
   min-height: 85vh;
   padding-top: 10%;

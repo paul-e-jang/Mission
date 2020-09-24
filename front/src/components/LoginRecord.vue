@@ -1,77 +1,162 @@
 <template>
-  <div class="dashboard">
-    <div class="dashboard-item--full">
-      <div class="card">
-        Something!
+<v-container>
+    <v-data-table
+      :items="desserts"
+      :search="search"
+      :sort-by="['created_date']"
+      calculated-widths="true"
+      :headers="headers"
+      :loading="loading"
+      :dense="dense"
+      id="Logs"
+    >
+    <template v-slot:top>
+      <div>
+        <h2> Login / Logout 기록 </h2>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="아이디 혹은 이름으로 검색하세요"
+        single-line
+        hide-details
+        id="search"
+      ></v-text-field>
       </div>
-    </div>
-  </div>
+      </template>
+      <template v-slot:body="{ items }">
+        <tbody>
+          <tr v-for="(item, index) in items" :key="index">
+            <td>{{ index+1 }}</td>
+            <td>
+              {{ item.userCode }}
+            </td>
+            <td>
+              {{ item.name }}
+            </td>
+            <td>{{ dateConvert(item.loggedAt) }}</td>
+            <td>{{ dateConvert(item.logOuttedAt) }}</td>
+          </tr>
+        </tbody>
+      </template>
+      <template v-slot:progress>
+        <v-progress-linear color="purple" :height="10" indeterminate></v-progress-linear>
+      </template>
+    </v-data-table>
+</v-container>
 </template>
 
 <script>
+import LogService from '@/services/log'
+import DateParser from '@/utils/date-parser'
+import { mdiDelete } from '@mdi/js'
+
 export default {
-  name: 'LoginRecord'
+  name: 'BoardView',
+  components: {
+  },
+  mounted () {
+    this.Fetch()
+  },
+  computed: {
+    boardname () {
+      return 'default'
+    }
+  },
+  methods: {
+    Fetch () {
+      LogService.fetchlogs('default')
+      this.$bus.$on('logs', (data) => {
+        this.logs = data.logs
+      })
+    },
+    dateConvert (date) {
+      return DateParser.ParseRefactor(date)
+    }
+  },
+  data () {
+    return {
+      mdiDelete,
+      search: '',
+      dense: false,
+      loading: false,
+      errorMessage: '',
+      headers: [
+        {
+          text: '번호',
+          sortable: true,
+          value: 'no',
+          width: '',
+          align: 'center'
+        },
+        {
+          text: '아이디',
+          sortable: true,
+          value: 'userCode',
+          width: '',
+          align: 'center'
+        },
+        {
+          text: '이름',
+          value: 'name',
+          sortable: true,
+          width: '',
+          align: 'center'
+        },
+        {
+          text: '로그인 시각',
+          value: 'loggedAt',
+          sortable: true,
+          width: '',
+          align: 'center'
+        },
+        {
+          text: '로그아웃 시각',
+          value: 'logOuttedAt',
+          sortable: true,
+          width: '',
+          align: 'center'
+        }
+      ],
+      logs: [],
+      /* desserts: 개발용 mock 데이터 */
+      desserts: [
+        {
+          no: '1',
+          userCode: 'aslqqq',
+          name: 'Frozen Yogurt',
+          loggedAt: '22/35',
+          logOuttedAt: '26/35',
+          id: '32'
+        },
+        {
+          no: '2',
+          userCode: 'qalkqq',
+          name: 'Yogurt',
+          loggedAt: '22/35',
+          logOuttedAt: '26/35',
+          id: '32'
+        }
+      ]
+    }
+  }
 }
 </script>
 
-<style scoped lang="scss">
-// Dashboard Overview Grid
-
-.dashboard {
-  --column-count: 2;
-
-  // Flexbox Fallback
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 calc(var(--spacing) * -0.5);
-
-  // Grid
-  display: grid;
-  grid-template-columns: repeat(var(--column-count), 1fr);
-  grid-gap: var(--spacing);
-
-  &-item {
-    // By default, items span 2 columns
-    flex: 1 1 50%;
-    grid-column-end: span 2;
-    padding: calc(var(--spacing) / 2);
-
-    // these span the full width
-    &--full {
-      flex-basis: 100%;
-      grid-column: 1 / -1;
-    }
-
-    // these span only one column
-    &--col {
-      flex-basis: calc(100% / var(--column-count));
-      grid-column-end: span 1;
-    }
-  }
-
-  // Switch to 4-col grid on larger screens
-  @media screen and (min-width: 48rem) {
-    --column-count: 4;
-  }
-
-  // If we have grid support, reset the margins and paddings;
-  // grid-gap handles the spacing for us.
-  @supports (display: grid) {
-    margin: 0;
-
-    &-item {
-      padding: 0;
-    }
-  }
-  .card {
-  height: 100%;
-  width: 100%;
-  padding: 1rem;
-  font-size: 2rem;
-  font-weight: 300;
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+<style scoped>
+* {
+  text-align: center;
 }
+#Logs {
+  min-height: 75vh;
+  padding: 20px;
+
+}
+#Logs td {
+  padding-left: 0px;
+}
+
+#search {
+  margin-bottom: 10px;
+  width: 100px;
 }
 </style>

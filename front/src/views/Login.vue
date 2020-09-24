@@ -14,7 +14,7 @@
       <input type="text" v-model="form.username" id="Id" class="form-control" placeholder="아이디" autofocus>
       <label for="Id">이메일 or 아이디</label>
          <div class="field-error" v-if="$v.form.username.$dirty">
-          <div class="error text-warning" v-if="!$v.form.username.required">이메일 혹은 아이디를 입력하세요.</div>
+          <div class="denied" v-if="!$v.form.username.required">이메일 혹은 아이디를 입력하세요.</div>
           </div>
     </div>
 
@@ -22,7 +22,7 @@
       <input type="password" v-model="form.password" id="Pass" class="form-control" placeholder="비밀번호" >
       <label for="Pass">비밀번호</label>
           <div class="field-error" v-if="$v.form.password.$dirty">
-          <div class="error text-warning" v-if="!$v.form.password.required">비밀번호를 입력하세요.</div>
+          <div class="denied" v-if="!$v.form.password.required">비밀번호를 입력하세요.</div>
           </div>
     </div>
     <button class="btn-lg btn-warning btn-block mb-3 mt-3 login_btn" type="submit">로그인</button>
@@ -81,6 +81,9 @@ export default {
 </script>
 
 <style scoped>
+.denied {
+  color: #FFB320;
+}
 .login {
   min-height: 85vh;
   padding-top: 10%;
