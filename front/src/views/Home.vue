@@ -7,7 +7,7 @@
                     프런트엔드로 Vue.js / Vue-router / Vuex를 사용하였고, 스프링 프레임워크를 RESTapi 서버로 사용하였습니다. <br />
                     서버로 Tomcat9를 사용하였고, 스프링 시큐리티와 연동하여 Single Page Application을 구성하였습니다.
                   </h5>
-                  <button>Goto gallary</button>
+                  <v-btn dark color="warning"> Goto gallary </v-btn>
               </div>
           </section>
 

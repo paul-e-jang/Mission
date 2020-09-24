@@ -56,53 +56,6 @@ strong {
     justify-content: space-between;
 }
 
-.badge {
-    padding: 9px 20px;
-    color: #eee;
-    display: inline-block;
-    text-transform: uppercase;
-    font-weight: 400;
-    text-align: center;
-    font-size: 0.75em;
-}
-
-.badge.new {
-    background-color: #FF205F;
-}
-
-.badge.strategy {
-    background-color: #4EAE60;
-}
-
-.badge.racing {
-    background-color: #694EAE;
-}
-
-.badge.rpg,
-.badge.adventure {
-    background-color: #40ABF5;
-}
-
-.badge.tournaments {
-    background-color: #FB6E10;
-}
-
-.badge.premium-tournament {
-    background-color: #FFB320;
-    color: #252525;
-}
-
-.shade {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.7);
-}
-
-
 /* end: global style rules */
 
 
