@@ -1,12 +1,12 @@
 package com.sjwp.mission.domain.model.member;
 
-public class MemberCodeAlreadyExistsException extends MemberRegistrationException{
+public class MemberAlreadyExistsException extends MemberRegistrationException{
 	
 	private static final long serialVersionUID = 5779231407690011443L;
 	
 	String message;
 	
-	MemberCodeAlreadyExistsException(String message){
+	MemberAlreadyExistsException(String message){
 		this.message = message;
 	}
 

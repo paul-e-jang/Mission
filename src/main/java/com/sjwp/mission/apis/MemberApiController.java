@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sjwp.mission.apis.payload.MemberRegistrationPayload;
 import com.sjwp.mission.apis.result.ApiResult;
 import com.sjwp.mission.apis.result.Result;
-import com.sjwp.mission.domain.model.member.EmailAddressAlreadyExistsException;
-import com.sjwp.mission.domain.model.member.MemberCodeAlreadyExistsException;
+import com.sjwp.mission.domain.model.member.MemberAlreadyExistsException;
 import com.sjwp.mission.domain.model.member.MemberRegistrationException;
 import com.sjwp.mission.domain.model.member.MemberRegistrationManagement;
 import com.sjwp.mission.domain.model.member.MemberService;
@@ -39,7 +38,7 @@ public class MemberApiController {
     } catch (MemberRegistrationException e) {
       String errorMessage = "오류 발생";
       
-      if(e instanceof MemberCodeAlreadyExistsException || e instanceof EmailAddressAlreadyExistsException) {
+      if(e instanceof MemberAlreadyExistsException) {
     	  errorMessage = e.getMessage();
       }
       
