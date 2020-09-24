@@ -27,7 +27,7 @@ public class Member extends AbstractBaseEntity{
     private Long id;
     @Column(name = "MEMBER_CODE", length = 20, nullable = false)
     private String memberCode;
-    @Column(name = "PASSWORD", nullable = false, length = 20)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
     @Column(name = "EMAIL_ADDRESS", nullable = false, length = 50)
     private String emailAddress;

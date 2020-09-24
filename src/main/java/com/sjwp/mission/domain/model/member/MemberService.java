@@ -24,6 +24,15 @@ public class MemberService {
     	return (List<Member>) memberRepository.findAll();
     }
     
+    public boolean existsByMemberCode(String memberCode){
+    	return memberRepository.existsByMemberCode(memberCode);
+    }
+    
+    public boolean existsByEmailAddress(String emailAddress){
+    	return memberRepository.existsByMemberCode(emailAddress);
+    }
+    
+    
     public Optional<Member> findByMemberCode(String memberCode) {
     	return memberRepository.findByMemberCode(memberCode);
     }

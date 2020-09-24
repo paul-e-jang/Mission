@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 public class MemberRegistrationPayload {
 
-  @Size(min = 2, max = 20, message = "학번은 최소 2글자, 최대 20글자 입니다.")
+  @Size(min = 2, max = 20, message = "아이디는 최소 2글자, 최대 20글자 입니다.")
   @NotNull
   private String memberCode;
   

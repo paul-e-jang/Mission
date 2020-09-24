@@ -11,29 +11,36 @@
     <div v-show="errorMessage" class="alert alert-danger failed">{{ errorMessage }}</div>
 
     <div class="form-label-group">
-      <input type="text" v-model="form.username" id="user-code" class="form-control" placeholder="아이디" autofocus>
-      <label for="Id">아이디를 입력하세요.</label>
-         <div class="field-error" v-if="$v.form.username.$dirty">
-          <div class="denied" v-if="!$v.form.username.required">아이디를 입력하세요.</div>
+      <input type="text" v-model="form.memberCode" id="user-code" class="form-control" placeholder="아이디" autofocus>
+      <label for="Id">아이디(최소 2글자, 최대 20글자)</label>
+         <div class="field-error" v-if="$v.form.memberCode.$dirty">
+          <div class="denied" v-if="!$v.form.memberCode.required">아이디를 입력하세요</div>
           </div>
     </div>
     <div class="form-label-group">
-      <input type="text" v-model="form.email" id="email-address" class="form-control" placeholder="이메일" >
-      <label for="Id">이메일을 입력하세요.</label>
-         <div class="field-error" v-if="$v.form.email.$dirty">
-          <div class="denied" v-if="!$v.form.email.required">이메일을 입력하세요.</div>
+      <input type="text" v-model="form.emailAddress" id="email-address" class="form-control" placeholder="이메일" >
+      <label for="Id">이메일</label>
+         <div class="field-error" v-if="$v.form.emailAddress.$dirty">
+          <div class="denied" v-if="!$v.form.emailAddress.required">이메일을 입력하세요.</div>
+          </div>
+    </div>
+    <div class="form-label-group">
+      <input type="text" v-model="form.name" class="form-control" placeholder="이름" >
+      <label for="Id">이름</label>
+         <div class="field-error" v-if="$v.form.name.$dirty">
+          <div class="denied" v-if="!$v.form.name.required">이름을 입력하세요.</div>
           </div>
     </div>
     <div class="form-label-group">
       <input type="password" v-model="form.password" id="password" class="form-control" placeholder="비밀번호" >
-      <label for="Pass">비밀번호를 입력하세요.</label>
+      <label for="Pass">비밀번호 입력(최소 10글자, 최대 20글자 )</label>
           <div class="field-error" v-if="$v.form.password.$dirty">
           <div class="denied" v-if="!$v.form.password.required">비밀번호를 입력하세요.</div>
           </div>
     </div>
     <div class="form-label-group">
       <input type="password" v-model="form.password2" id="password2" class="form-control" placeholder="비밀번호2" >
-      <label for="Pass">비밀번호를 한번 더 입력하세요.</label>
+      <label for="Pass">비밀번호 확인</label>
           <div class="field-error" v-if="$v.form.password2.$dirty">
           <div class="denied" v-if="!$v.form.password2.required">비밀번호를 한번 더 입력하세요.</div>
           </div>
@@ -49,15 +56,16 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
-import authenticationService from '@/services/authentication'
+import registrationService from '@/services/registration'
 
 export default {
   name: 'LoginPage',
   data: function () {
     return {
       form: {
-        username: '',
-        email: '',
+        memberCode: '',
+        emailAddress: '',
+        name: '',
         password: '',
         password2: ''
       },
@@ -66,13 +74,16 @@ export default {
   },
   validations: {
     form: {
-      username: {
+      memberCode: {
         required
       },
       password: {
         required
       },
-      email: {
+      name: {
+        required
+      },
+      emailAddress: {
         required
       },
       password2: {
@@ -87,14 +98,11 @@ export default {
         return
       }
 
-      authenticationService.authenticate(this.form).then(() => {
-        authenticationService.fetchuser()
-        this.$bus.$on('myDataFetched', data => {
-          this.$store.commit('updateMyData', data)
-        })
-        this.$router.push({ name: 'Home' })
+      registrationService.register(this.form).then(() => {
+        alert('성공적으로 등록되었습니다.')
+        this.$router.push('/login')
       }).catch((error) => {
-        this.errorMessage = error.message
+        this.errorMessage = '유저 등록에 실패했습니다. 이유: ' + error.message
       })
     }
   }

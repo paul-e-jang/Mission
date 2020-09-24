@@ -148,7 +148,8 @@ export default {
 }
 #Logs {
   min-height: 75vh;
-  padding: 20px;
+  padding: 10px;
+  width: 100%;
 
 }
 #Logs td {
