@@ -2,7 +2,7 @@
 코딩 테스트 - 갤러리 과제
 
 # Demo
-{% include include.html id="유튜브동영상url" %}  
+![Demo](https://github.com/bashpound/Mission/blob/master/_include/1.PNG)(https://youtu.be/Zh6qj9Tr5Tk)
 
 
 ## Tools
