@@ -28,21 +28,30 @@ export default {
   data () {
     return {
       imgs: [{
-        name: 'alps.jpg',
-        alt: 'I will live here someday',
-        src: ''
+        name: 'alps.jpeg',
+        alt: '1번 이미지',
+        src: 'https://i.loli.net/2018/11/10/5be6852cdb002.jpeg'
       },
       {
-        name: 'bear.jpg',
-        alt: 'Friendly bear',
-        src: '../assets/img/bear.jpg'
-      }],
+        name: 'bear.jpeg',
+        alt: '2번 이미지',
+        src: 'https://i.loli.net/2018/11/10/5be6852ce6965.jpeg'
+      },
+      {
+        name: 'water.jpeg',
+        alt: '3번 이미지',
+        src: 'https://i.loli.net/2018/11/10/5be6852e1366d.jpeg'
+      },
+      {
+        name: 'mountain.jpeg',
+        alt: '4번 이미지',
+        src: 'https://i.loli.net/2018/11/10/5be6852e33f19.jpeg'
+      }
+      ],
       visible: false,
-      index: 0
+      index: 0,
+      img: []
     }
-  },
-  mounted () {
-    this.Fetch()
   },
   methods: {
     show (index) {
@@ -62,7 +71,7 @@ export default {
     Fetch () {
       articleservice.fetchArticles()
       this.$bus.$on('articleLoad', (data) => {
-        this.imgs = data
+        this.img = data
         console.log(this.imgs)
       })
     }
