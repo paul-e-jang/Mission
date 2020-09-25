@@ -30,7 +30,7 @@ import com.sjwp.mission.config.servlet.HistoryModeFilter;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private static final String[] PUBLIC = new String[]{
-    "/", "/error", "/login", "/logout", "/register", "/api/registrations", "/api/fetchLogs"};
+    "/", "/error", "/login", "/logout", "/register", "/api/registrations", "/api/fetchLogs", "api/fileUpload", "/api/registerArticle"};
 
 
   @Override

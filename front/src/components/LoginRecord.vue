@@ -33,7 +33,7 @@
             <td>
               {{ item.name }}
             </td>
-            <td>{{ dateConvert(item.loggedAt) }}</td>
+            <td>{{ dateConvert(item.logInAt) }}</td>
             <td>{{ dateConvert(item.logOuttedAt) }}</td>
           </tr>
         </tbody>
@@ -66,7 +66,8 @@ export default {
     Fetch () {
       LogService.fetchLogs()
       this.$bus.$on('logs', (data) => {
-        this.logs = data.logs
+        this.logs = data
+        console.log(this.logs)
       })
     },
     dateConvert (date) {

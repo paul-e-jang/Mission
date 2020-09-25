@@ -44,6 +44,14 @@ public class Article extends AbstractBaseEntity {
         this.uploaded_time = uploaded_time;
     }
 
+    public static Article Create(String imgName, String imgSize, String uploader, Date uploaded_time) {
+    	Article article = new Article();
+    	article.imgName = imgName;
+    	article.imgSize = imgSize;
+    	article.uploader = uploader;
+    	article.uploaded_time = uploaded_time;
+        return article;
+    }
 
 
     public Long getId() {

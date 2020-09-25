@@ -1,20 +1,16 @@
 package com.sjwp.mission.config.servlet;
 
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.View;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @EnableWebSecurity
@@ -33,11 +29,12 @@ public class ServletConfig implements WebMvcConfigurer{
     }
     
     @Bean
-    public View toJson() {
-        MappingJackson2JsonView view = new MappingJackson2JsonView();
-        view.setPrettyPrint(true);
-        return view;
+    public MultipartResolver multipartResolver() {
+
+       StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
+       return multipartResolver;
     }
+    
     
     /* CORS 설정
     public FilterRegistrationBean corsFilter() {

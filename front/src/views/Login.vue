@@ -69,6 +69,7 @@ export default {
           this.$store.commit('updateMyData', data)
         })
         alert('로그인 성공')
+        authenticationService.afterLogin()
         this.$router.push('/')
       }).catch((error) => {
         this.errorMessage = error.message

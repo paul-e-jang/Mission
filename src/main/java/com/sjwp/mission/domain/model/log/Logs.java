@@ -33,7 +33,6 @@ public class Logs extends AbstractBaseEntity {
     @Column(name = "Name")
     private String Name;
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "LOG_IN_AT")
     private Date logInAt;
     
@@ -46,12 +45,14 @@ public class Logs extends AbstractBaseEntity {
     public Logs(String userCode, String Name) {
         this.userCode = userCode;
         this.Name = Name;
+        this.logInAt = new Date();
     }
     
     public static Logs Create(String userCode, String Name) {
     	Logs logs = new Logs();
         logs.userCode = userCode;
         logs.Name = Name;
+        logs.logInAt = new Date();
         return logs;
     }
 

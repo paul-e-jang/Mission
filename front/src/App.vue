@@ -36,7 +36,16 @@ export default {
     document.title = 'SmartJack coding test'
     this.$router.beforeEach((to, from, next) => {
       this.transitionName = DEFAULT_TRANSITION
-      next()
+      if (to.name === 'Admin' || to.name === 'Gallary') {
+        if (!this.$store.getters.logged) {
+          alert('로그인 하세요.')
+          this.$router.push('login')
+        } else {
+          next()
+        }
+      } else {
+        next()
+      }
     })
   },
   methods: {

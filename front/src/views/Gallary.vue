@@ -22,6 +22,7 @@
 
 <script>
 import VueEasyLightbox from 'vue-easy-lightbox'
+import articleservice from '@/services/article'
 
 export default {
   data () {
@@ -40,6 +41,9 @@ export default {
       index: 0
     }
   },
+  mounted () {
+    this.Fetch()
+  },
   methods: {
     show (index) {
       this.index = index
@@ -54,8 +58,14 @@ export default {
           this.imgs.push('https://i.loli.net/2018/11/10/5be6852e33f19.jpeg')
         }, 1000)
       }
+    },
+    Fetch () {
+      articleservice.fetchArticles()
+      this.$bus.$on('articleLoad', (data) => {
+        this.imgs = data
+        console.log(this.imgs)
+      })
     }
-
   },
   components: {
     VueEasyLightbox

@@ -4,28 +4,32 @@ import eventBus from '@/event-bus'
 
 export default {
 
-  fetchLogs () {
+  fetchArticles () {
     return new Promise((resolve, reject) => {
-      axios.get('/fetchLogs').then(({ data }) => {
+      axios.get('/getArticles').then(({ data }) => {
         resolve(data)
-        eventBus.$emit('logs', data)
+        console.log(data)
+        eventBus.$emit('articleLoad', data)
       }).catch((error) => {
         reject(errorParser.parse(error))
       })
     })
   },
-  writeLogs (detail) {
+  writeArticle (detail) {
     return new Promise((resolve, reject) => {
-      axios.post('/log', detail).then(({ data }) => {
+      axios.post({
+        url: '/registerArticle',
+        data: detail
+      }).then(({ data }) => {
         resolve(data)
       }).catch((error) => {
         reject(errorParser.parse(error))
       })
     })
   },
-  viewedUpdate (id, how) {
+  fileUpload (detail) {
     return new Promise((resolve, reject) => {
-      axios.post('/view/' + id + '/' + how).then(({ data }) => {
+      axios.post('/fileUpload', detail).then(({ data }) => {
         resolve(data)
       }).catch((error) => {
         reject(errorParser.parse(error))
