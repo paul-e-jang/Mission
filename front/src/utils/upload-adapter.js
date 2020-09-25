@@ -1,33 +1,25 @@
-export default class UploadAdapter {
-  constructor (loader) {
-    this.loader = loader
-  }
+export default {
 
-  upload () {
-    return this.loader.file
-      .then(file => new Promise((resolve, reject) => {
-        this._initRequest()
-        this._initListeners(resolve, reject, file)
-        console.log(file)
-        this._sendRequest(file)
-      }))
-  }
+  upload (file) {
+    return file => new Promise((resolve, reject) => {
+      this._initRequest()
+      this._initListeners(resolve, reject, file)
+      this._sendRequest(file)
+    })
+  },
 
-  // Aborts the upload process.
   abort () {
     if (this.xhr) {
       this.xhr.abort()
     }
-  }
+  },
 
-  // Initializes the XMLHttpRequest object using the URL passed to the constructor.
   _initRequest () {
     const xhr = this.xhr = new XMLHttpRequest()
     xhr.open('POST', 'http://localhost:8090/api/upload', true)
     xhr.responseType = 'json'
-  }
+  },
 
-  // Initializes XMLHttpRequest listeners.
   _initListeners (resolve, reject, file) {
     const xhr = this.xhr
     const loader = this.loader
@@ -54,7 +46,7 @@ export default class UploadAdapter {
         }
       })
     }
-  }
+  },
 
   _sendRequest (file) {
     const data = new FormData()

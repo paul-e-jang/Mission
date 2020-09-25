@@ -51,13 +51,15 @@
 
 <script>
 import articleservice from '@/services/article'
+import uploadAdapter from '@/utils/upload-adapter'
+
 export default {
   data () {
     return {
       imageUrl: null,
       loading: null,
       loader: null,
-      image: null,
+      upload: null,
       uploader: this.$store.getters.user
     }
   },
@@ -80,16 +82,14 @@ export default {
       const file = e.target.files[0]
       this.image = file
       this.imageUrl = URL.createObjectURL(file)
+      uploadAdapter.upload(file)
     },
     submitForm () {
       const f = new FormData()
-      const f2 = new FormData()
-      f2.append('image', this.image)
       f.append('imgName', this.image.name)
       f.append('imgSize', this.image.size)
       f.append('uploader', this.uploader)
       f.append('uploaded_time', new Date())
-      articleservice.fileUpload(f2)
       articleservice.writeArticle(f).then(() => {
         alert('성공적으로 등록되었습니다.')
         this.$router.push('/gallary')
