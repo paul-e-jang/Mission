@@ -72,7 +72,7 @@ export default {
       articleservice.fetchArticles()
       this.$bus.$on('articleLoad', (data) => {
         this.img = data
-        console.log(this.imgs)
+        console.log(this.img)
       })
     }
   },

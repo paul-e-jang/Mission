@@ -38,21 +38,26 @@ public class Logs extends AbstractBaseEntity {
     
     @Column(name = "LOG_OUTED_AT", nullable = true)
     private Date logOuttedAt;
-
+    
+    @Column(name = "session_id", nullable = false)
+    private String sessionId;
+    
     public Logs() {
     }
 
-    public Logs(String userCode, String Name) {
+    public Logs(String userCode, String Name, String sessionId) {
         this.userCode = userCode;
         this.Name = Name;
         this.logInAt = new Date();
+        this.sessionId = sessionId;
     }
     
-    public static Logs Create(String userCode, String Name) {
+    public static Logs Create(String userCode, String Name, String sessionId) {
     	Logs logs = new Logs();
         logs.userCode = userCode;
         logs.Name = Name;
         logs.logInAt = new Date();
+        logs.sessionId = sessionId;
         return logs;
     }
 
@@ -80,6 +85,14 @@ public class Logs extends AbstractBaseEntity {
 		Name = name;
 	}
 
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+
 	public Date getLogInAt() {
 		return logInAt;
 	}
@@ -104,6 +117,7 @@ public class Logs extends AbstractBaseEntity {
                 ", Name=" + Name +
                 ", logInAt=" + logInAt +
                 ", logOuttedAt=" + logOuttedAt +
+                ", sessionId=" + sessionId +
                 ']';
     }
 
@@ -115,11 +129,12 @@ public class Logs extends AbstractBaseEntity {
         return id ==  logs.id&&
                 Objects.equals(userCode, logs.userCode) &&
                 Objects.equals(Name, logs.Name) &&
-                Objects.equals(logInAt, logs.logInAt);
+                Objects.equals(logInAt, logs.logInAt) &&
+        		Objects.equals(sessionId, logs.sessionId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userCode, Name, logInAt, logOuttedAt);
+        return Objects.hash(id);
     }
 }

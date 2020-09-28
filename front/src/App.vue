@@ -46,15 +46,12 @@ export default {
         }
       } else if (to.name === 'LogOut') {
         auth.beforeLogOut().then(() => {
-          auth.fetchuser()
-          this.$bus.$on('myDataFetched', data => {
-            this.$store.commit('updateMyData', data)
-          })
+          this.$store.commit('logout')
           alert('로그아웃 성공')
-          this.$router.push('/')
-        }).catch((error) => {
-          alert('문제가 발생했습니다.' + error.message)
-          this.$router.push('/')
+        }).catch(() => {
+          alert('로그아웃 성공')
+          this.$store.commit('logout')
+          window.location.href = 'http://localhost:8090/'
         })
       } else { next() }
     })

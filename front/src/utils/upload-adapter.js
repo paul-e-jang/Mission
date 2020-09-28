@@ -16,7 +16,7 @@ export default {
 
   _initRequest () {
     const xhr = this.xhr = new XMLHttpRequest()
-    xhr.open('POST', 'http://localhost:8090/api/upload', true)
+    xhr.open('POST', 'http://localhost:8090/api/fileUpload', true)
     xhr.responseType = 'json'
   },
 

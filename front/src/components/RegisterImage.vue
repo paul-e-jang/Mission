@@ -51,7 +51,6 @@
 
 <script>
 import articleservice from '@/services/article'
-import uploadAdapter from '@/utils/upload-adapter'
 
 export default {
   data () {
@@ -59,7 +58,7 @@ export default {
       imageUrl: null,
       loading: null,
       loader: null,
-      upload: null,
+      image: null,
       uploader: this.$store.getters.user
     }
   },
@@ -78,19 +77,20 @@ export default {
       this.$refs.imageInput.click()
     },
     onChangeImages (e) {
-      console.log(e.target.files)
       const file = e.target.files[0]
       this.image = file
       this.imageUrl = URL.createObjectURL(file)
-      uploadAdapter.upload(file)
+      const fm = new FormData()
+      fm.append('image', file)
+      articleservice.upload(fm).catch((error) => alert(error.message))
     },
     submitForm () {
-      const f = new FormData()
-      f.append('imgName', this.image.name)
-      f.append('imgSize', this.image.size)
-      f.append('uploader', this.uploader)
-      f.append('uploaded_time', new Date())
-      articleservice.writeArticle(f).then(() => {
+      const json = JSON.stringify({
+        imgName: this.image.name,
+        imgSize: this.image.size,
+        uploader: this.uploader
+      })
+      articleservice.writeArticle(json).then(() => {
         alert('성공적으로 등록되었습니다.')
         this.$router.push('/gallary')
       }).catch((error) => {

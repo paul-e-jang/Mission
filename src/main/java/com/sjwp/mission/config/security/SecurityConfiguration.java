@@ -22,7 +22,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.sjwp.mission.apis.authentication.AuthenticationFilter;
 import com.sjwp.mission.apis.authentication.SimpleAuthenticationFailureHandler;
 import com.sjwp.mission.apis.authentication.SimpleAuthenticationSuccessHandler;
-import com.sjwp.mission.apis.authentication.SimpleLogoutHandler;
 import com.sjwp.mission.apis.authentication.SimpleLogoutSuccessHandler;
 import com.sjwp.mission.config.servlet.HistoryModeFilter;
 
@@ -53,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .and()
         .logout()
         .logoutUrl("/logout")
-        .logoutSuccessUrl("/");
+        .logoutSuccessHandler(logoutSuccessHandler());
   }
 
   @Override

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.sjwp.mission.domain.model.AbstractBaseEntity;
 
@@ -31,25 +33,25 @@ public class Article extends AbstractBaseEntity {
     private String imgSize;
     @Column(name = "UPLOADER")
     private String uploader;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UPLOADED_TIME")
     private Date uploaded_time;
-
+    
     public Article() {
     }
 
-    public Article(String imgName, String imgSize, String uploader, Date uploaded_time) {
+    public Article(String imgName, String imgSize, String uploader) {
         this.imgName = imgName;
         this.imgSize = imgSize;
         this.uploader = uploader;
-        this.uploaded_time = uploaded_time;
     }
 
-    public static Article Create(String imgName, String imgSize, String uploader, Date uploaded_time) {
+    public static Article Create(String imgName, String imgSize, String uploader) {
     	Article article = new Article();
     	article.imgName = imgName;
     	article.imgSize = imgSize;
     	article.uploader = uploader;
-    	article.uploaded_time = uploaded_time;
         return article;
     }
 

@@ -1,6 +1,9 @@
 package com.sjwp.mission.apis;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,16 +37,20 @@ public class LogsApiController {
     
     @PostMapping(value="/api/loginReg")
     @ResponseBody
-    public ResponseEntity<ApiResult> loginReg(@CurrentUser SimpleMember member) {
-    	Logs logs = Logs.Create(member.getUsername(), member.getName());
+    public ResponseEntity<ApiResult> loginReg(@CurrentUser SimpleMember member, HttpServletRequest req) {
+    	String sid = req.getSession().getId();
+    	Optional<Logs> log = service.findFirstBySessionId(sid);
+    	if(!log.isPresent()) {
+    	Logs logs = Logs.Create(member.getUsername(), member.getName(), req.getSession().getId());
     	service.save(logs);
+    	}
     	return Result.created();
     }
     
     @PutMapping(value="/api/logOutReg")
     @ResponseBody
-    public String logOutReg(@CurrentUser SimpleMember member) {
-    	service.afterLogout(member.getUsername());
+    public String logOutReg(@CurrentUser SimpleMember member, HttpServletRequest req) {
+    	service.Logout(req.getSession().getId());
     	return "redirect:/logout";
     }
 

@@ -1,6 +1,9 @@
 package com.sjwp.mission.apis;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.token.DefaultToken;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +59,7 @@ public class MemberApiController {
   	Gson gson = new Gson();
   	JsonObject json = new JsonObject();
   	
-  	if (user != null) {
+  	if (!user.getName().equals("GUEST")) {
   		currentUser = user.getName();
           json.addProperty("user", currentUser);
           json.addProperty("authenticated", true);

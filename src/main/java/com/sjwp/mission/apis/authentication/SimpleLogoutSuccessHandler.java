@@ -16,7 +16,8 @@ public class SimpleLogoutSuccessHandler implements LogoutSuccessHandler {
   @Override
   public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
     throws IOException {
-
+	
+	request.changeSessionId();
     response.setStatus(HttpStatus.OK.value());
     response.sendRedirect("/");
     JsonUtils.write(response.getWriter(), ApiResult.message("logged-out"));

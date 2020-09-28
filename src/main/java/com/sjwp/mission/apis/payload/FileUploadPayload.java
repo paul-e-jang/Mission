@@ -1,12 +1,15 @@
 package com.sjwp.mission.apis.payload;
 
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 public class FileUploadPayload {
+	@NotNull
 	String imgName;
+	@NotNull
 	String imgSize;
+	@NotNull
 	String uploader;
-	Date uploaded_time;
+	@NotNull
 	String path;
 	
 	public String getPath() {
@@ -32,12 +35,6 @@ public class FileUploadPayload {
 	}
 	public void setUploader(String uploader) {
 		this.uploader = uploader;
-	}
-	public Date getUploaded_time() {
-		return uploaded_time;
-	}
-	public void setUploaded_time(Date uploaded_time) {
-		this.uploaded_time = uploaded_time;
 	}
 	
 }

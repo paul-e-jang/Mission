@@ -38,6 +38,7 @@ export default {
   methods: {
     beforeLogout () {
       auth.beforeLogOut().then(() => {
+        this.$store.commit('logout')
         alert('로그아웃 완료')
       }).catch((error) => {
         alert(error.message)

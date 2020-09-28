@@ -17,9 +17,11 @@ export default {
   },
   writeArticle (detail) {
     return new Promise((resolve, reject) => {
-      axios.post({
-        url: '/registerArticle',
-        data: detail
+      axios({
+        method: 'post',
+        url: '/writeArticle',
+        data: detail,
+        headers: { 'content-type': 'application/json' }
       }).then(({ data }) => {
         resolve(data)
       }).catch((error) => {
@@ -29,7 +31,15 @@ export default {
   },
   fileUpload (detail) {
     return new Promise((resolve, reject) => {
-      axios.post('/fileUpload', detail).then(({ data }) => {
+      axios({
+        method: 'post',
+        url: '/fileUpload',
+        data: detail,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data'
+        }
+      }).then(({ data }) => {
         resolve(data)
       }).catch((error) => {
         reject(errorParser.parse(error))

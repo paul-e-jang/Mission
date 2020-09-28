@@ -2,6 +2,7 @@ package com.sjwp.mission.domain.model.log;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,15 @@ public class LogsService {
 		return repo.save(logs);
 	}
 	
-	public Logs afterLogout(String userCode) {
-		Logs log = repo.findByUserCode(userCode);
-		log.setLogOuttedAt(new Date());
-		return repo.save(log);
+	public Optional<Logs> findFirstBySessionId(String sessionId) {
+		return repo.findFirstBySessionId(sessionId);
+	}
+	
+	public void Logout(String sessionId) {
+		Optional<Logs> logs = repo.findFirstBySessionId(sessionId);
+		logs.ifPresent(e -> {
+			e.setLogOuttedAt(new Date());
+			repo.save(e);
+		});
 	}
 }
