@@ -42,7 +42,7 @@ export default {
 
   beforeLogOut () {
     return new Promise((resolve, reject) => {
-      axios.post('/logOutReg').then(({ data }) => {
+      axios.put('/logOutReg').then(({ data }) => {
         resolve(data)
       }).catch((error) => {
         reject(errorParser.parse(error))

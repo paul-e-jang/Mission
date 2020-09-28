@@ -17,10 +17,12 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.sjwp.mission.apis.authentication.AuthenticationFilter;
 import com.sjwp.mission.apis.authentication.SimpleAuthenticationFailureHandler;
 import com.sjwp.mission.apis.authentication.SimpleAuthenticationSuccessHandler;
+import com.sjwp.mission.apis.authentication.SimpleLogoutHandler;
 import com.sjwp.mission.apis.authentication.SimpleLogoutSuccessHandler;
 import com.sjwp.mission.config.servlet.HistoryModeFilter;
 
@@ -30,7 +32,7 @@ import com.sjwp.mission.config.servlet.HistoryModeFilter;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private static final String[] PUBLIC = new String[]{
-    "/", "/error", "/login", "/logout", "/register", "/api/registrations", "/api/fetchLogs", "api/fileUpload", "/api/registerArticle"};
+    "/", "/error", "/login", "/register", "/api/registrations", "/api/fetchLogs", "api/fileUpload", "/api/registerArticle"};
 
 
   @Override
@@ -51,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .and()
         .logout()
         .logoutUrl("/logout")
-        .logoutSuccessHandler(logoutSuccessHandler());
+        .logoutSuccessUrl("/");
   }
 
   @Override

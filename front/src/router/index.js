@@ -41,7 +41,7 @@ const routes = [{
 },
 {
   path: '/logout',
-  redirect: '/'
+  name: 'LogOut'
 },
 {
   path: '/register',

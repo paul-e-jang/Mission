@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sjwp.mission.apis.result.ApiResult;
@@ -39,11 +40,11 @@ public class LogsApiController {
     	return Result.created();
     }
     
-    @PostMapping(value="/api/logOutReg")
+    @PutMapping(value="/api/logOutReg")
     @ResponseBody
-    public ResponseEntity<ApiResult> logOutReg(@CurrentUser SimpleMember member) {
+    public String logOutReg(@CurrentUser SimpleMember member) {
     	service.afterLogout(member.getUsername());
-    	return Result.ok();
+    	return "redirect:/logout";
     }
 
 }

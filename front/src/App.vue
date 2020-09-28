@@ -22,6 +22,7 @@
 <script>
 import AppBar from './components/Appbar'
 import Footer from './components/Footer'
+import auth from './services/authentication'
 
 const DEFAULT_TRANSITION = 'fade'
 
@@ -43,9 +44,19 @@ export default {
         } else {
           next()
         }
-      } else {
-        next()
-      }
+      } else if (to.name === 'LogOut') {
+        auth.beforeLogOut().then(() => {
+          auth.fetchuser()
+          this.$bus.$on('myDataFetched', data => {
+            this.$store.commit('updateMyData', data)
+          })
+          alert('로그아웃 성공')
+          this.$router.push('/')
+        }).catch((error) => {
+          alert('문제가 발생했습니다.' + error.message)
+          this.$router.push('/')
+        })
+      } else { next() }
     })
   },
   methods: {
