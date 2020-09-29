@@ -37,7 +37,7 @@ public class Member extends AbstractBaseEntity{
     public static Member create(String username, String password, String emailAddress, String name) {
     	Member member = new Member();
         member.username = username;
-        member.password = password;
+        member.password = "[protected]";
         member.emailAddress = emailAddress;
         member.name = name;
         return member;

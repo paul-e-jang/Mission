@@ -14,8 +14,6 @@ import com.sjwp.mission.domain.model.member.SimpleMember;
 
 public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	
-	LogsService service;
-	
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                       Authentication authentication) throws IOException {
